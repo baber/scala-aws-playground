@@ -14,7 +14,6 @@ object SecurityGroups {
 
   def main(args: Array[String]): Unit = {
     createSSHGroup("allow-inbound-ssh")
-    createInboundSSHRule("allow-inbound-ssh")
   }
 
 
@@ -22,6 +21,7 @@ object SecurityGroups {
 
     val request = new CreateSecurityGroupRequest(name, "Allows inbound SSH access on port 22 only")
     ec2Client.createSecurityGroup(request)
+    createInboundSSHRule(name)
   }
 
   def createInboundSSHRule(securityGroup: String) = {
